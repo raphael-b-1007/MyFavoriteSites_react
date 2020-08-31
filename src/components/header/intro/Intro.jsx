@@ -1,22 +1,16 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 
 // Use PureComponent instead of Component because it handles the shouldComponentUpdate method for u.
 // If u want to define ur own shouldComponentUpdate logic use Component instead of PureComponent.
 class Intro extends PureComponent {
     render() {
-        const { intro } = this.props;
-
         return (
             <div className="tapp__intro">
-                {intro}
+                <p>Hier findest du eine Übersicht über Chayns-Sites.</p>
+                <p>Wenn du deine eigene Seite hinzufügen möchtest, kannst du das Formular unten ausfüllen.</p>
             </div>
         );
     }
 }
-
-Intro.propTypes = {
-    intro: PropTypes.string.isRequired,
-};
 
 export default Intro;

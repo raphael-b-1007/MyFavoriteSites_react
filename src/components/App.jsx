@@ -12,8 +12,8 @@ class App extends PureComponent {
     render() {
         return (
             <>
-                <Headline headline="Test 123"/>
-                <Intro intro="This is a very simple and basic example of how u can use chayns® and React together."/>
+                <Headline headline="My Favorit Sites"/>
+                <Intro/>
                 <Todos/>
             </>
         );
