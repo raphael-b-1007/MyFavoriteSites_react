@@ -1,0 +1,42 @@
+.list {
+    display: flex;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.list-item {
+    flex: 0 0 125px;
+    display: flex; 
+    flex-direction: column;
+    padding-bottom: 20px;
+    align-items: center;
+}
+
+.icon {
+    width: 70px !important;
+    height: 70px;
+    background-size: cover;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.icon:hover {
+    filter: brightness(0.8);
+}
+
+.background {
+    background-image: url('https://sub60.tobit.com/l/152342?size=70');
+    margin-bottom: 5px;
+    transition: all 0.2s;
+}
+
+.background:hover {
+    filter: brightness(0.8);
+}
+
+.centered {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
