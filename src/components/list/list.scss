@@ -27,11 +27,16 @@
 
 .background {
     background-image: url('https://sub60.tobit.com/l/152342?size=70');
-    // width: 70px !important;
     margin-bottom: 5px;
     transition: all 0.2s;
 }
 
 .background:hover {
     filter: brightness(0.8);
+}
+
+.centered {
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
