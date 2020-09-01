@@ -17,6 +17,7 @@ class List extends PureComponent {
     }
 
     componentDidMount() {
+        chayns.showWaitCursor();
         this.getData().then(() => {
             if (this.state.newSites.length === 31) {
                 this.setState((prevState) => ({
@@ -32,6 +33,7 @@ class List extends PureComponent {
                     moreAvailable: false,
                 }));
             }
+            chayns.hideWaitCursor();
         });
     }
 
