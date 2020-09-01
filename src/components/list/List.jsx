@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import './list.scss';
 
 import Site from './Site';
 
@@ -21,7 +22,7 @@ class List extends PureComponent {
 
     render() {
         return (
-            <div>
+            <div className="list">
                 {
                     // eslint-disable-next-line react/destructuring-assignment
                     this.state.data.map((site) => <Site key={site.locationId} siteInfo={site}/>)
