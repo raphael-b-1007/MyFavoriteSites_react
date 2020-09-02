@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Accordion, Input, TextArea, Button } from 'chayns-components/lib';
 import './form.scss';
 
@@ -11,6 +11,14 @@ function Form() {
     const [city, setCity] = useState('');
     const [siteName, setSiteName] = useState('');
     const [comment, setComment] = useState('');
+
+    useEffect(() => {
+        if (chayns.env.user.isAuthenticated) {
+            setFirstName(chayns.env.user.firstName);
+            setLastName(chayns.env.user.lastName);
+        }
+    }, []);
+
     return (
         <div>
             <Accordion head="Deine Seite fehlt noch?">
