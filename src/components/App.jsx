@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import './app.scss';
 
 // Components
-import Headline from './header/headline/Headline';
-import Intro from './header/intro/Intro';
+import Header from './header/Header';
+import Intro from './intro/Intro';
 import List from './list/List';
 import Form from './form/Form';
 
@@ -14,7 +14,7 @@ class App extends PureComponent {
     render() {
         return (
             <>
-                <Headline headline="My Favorit Sites"/>
+                <Header/>
                 <Intro/>
                 <List/>
                 <footer>
