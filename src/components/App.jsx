@@ -1,5 +1,6 @@
 import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
+import './app.scss';
 
 // Components
 import Headline from './header/headline/Headline';
@@ -16,7 +17,7 @@ class App extends PureComponent {
                 <Headline headline="My Favorit Sites"/>
                 <Intro/>
                 <List/>
-                <footer style={{ fontSize: '16px' }}>
+                <footer>
                     <Form/>
                 </footer>
             </>
