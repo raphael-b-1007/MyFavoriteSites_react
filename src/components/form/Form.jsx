@@ -19,6 +19,34 @@ function Form() {
         }
     }, []);
 
+    function sendForm() {
+        const message = `Eine Seite wurde vorgeschlagen: ${siteName} \n
+        Von: ${firstName} ${lastName} \n
+        E-Mail: ${eMail} \n
+        Adresse: ${address} ${areaCode} ${city} \n
+        Anmerkung: ${comment}`;
+        chayns.intercom.sendMessageToPage({
+            text: message,
+        }).then((data) => {
+            if (data.status === 200) chayns.dialog.alert('', `Vielen Dank, ${chayns.env.user.firstName}`);
+        });
+        setEMail('');
+        setAddress('');
+        setAreaCode('');
+        setCity('');
+        setSiteName('');
+        setComment('');
+    }
+
+    function submit() {
+        if (chayns.env.user.isAuthenticated) {
+            sendForm();
+        } else {
+            chayns.addAccessTokenChangeListener(sendForm);
+            chayns.login();
+        }
+    }
+
     return (
         <div>
             <Accordion head="Deine Seite fehlt noch?">
@@ -84,7 +112,7 @@ function Form() {
                         />
                         <div className="centered formItem">
                             {firstName && lastName && eMail && siteName
-                                ? <Button onClick={() => { console.log('ok'); }}>Hinzufügen</Button>
+                                ? <Button onClick={() => { submit(); }}>Hinzufügen</Button>
                                 : <Button disabled>Hinzufügen</Button>}
                         </div>
                     </form>
