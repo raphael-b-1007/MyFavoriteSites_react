@@ -11,11 +11,11 @@ function List(props) {
     const [updated, setUpdated] = useState(false);
 
     function getData() {
-        return fetch(`https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=${props.searchString}&Skip=${data.length}&Take=31`)
+        return fetch(`https://chayns2.tobit.com/SiteSearchApi/location/search/${props.searchString}/?skip=${data.length}&take=31`)
             .then((response) => response.json()).then((json) => {
-                setNewSites(json.Data);
+                setNewSites(json);
 
-                return json.Data;
+                return json;
             }).catch(() => { });
     }
 
@@ -29,21 +29,23 @@ function List(props) {
     }, [props.searchString]);
 
     useEffect(() => {
-        chayns.showWaitCursor();
-        getData().then((result) => {
-            if (result.length === 31) {
-                setData(result.slice(0, 30));
-                setNewSites([]);
-                setMoreAvailable(true);
-            } else {
-                setData(result);
-                setNewSites([]);
-                setMoreAvailable(false);
-            }
-            chayns.hideWaitCursor();
-            setRendered(true);
-            setUpdated(false);
-        });
+        if (!rendered) {
+            chayns.showWaitCursor();
+            getData().then((result) => {
+                if (result.length === 31) {
+                    setData(result.slice(0, 30));
+                    setNewSites([]);
+                    setMoreAvailable(true);
+                } else {
+                    setData(result);
+                    setNewSites([]);
+                    setMoreAvailable(false);
+                }
+                chayns.hideWaitCursor();
+                setRendered(true);
+                setUpdated(false);
+            });
+        }
     }, [updated]);
 
     useEffect(() => {
