@@ -6,7 +6,7 @@ function Site(props) {
         chayns.openUrlInBrowser(`https://chayns.net/${id}`);
     };
 
-    const fullName = props.siteInfo.appstoreName;
+    const fullName = props.siteInfo.locationName;
     const showName = fullName.length <= 15 ? fullName : `${fullName.substring(0, 12)}...`;
     return (
         <div className="list-item">
