@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import rootReducer from './redux-modules/reducers/rootReducer';
 
 const middlewares = [thunk];
 

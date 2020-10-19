@@ -3,11 +3,11 @@ import Headline from './Headline';
 import Searchbar from './Searchbar';
 import './header.scss';
 
-function Header(props) {
+function Header() {
     return (
         <div className="container">
             <Headline/>
-            <Searchbar setSearchString={(newString) => { props.setSearchString(newString); }}/>
+            <Searchbar/>
         </div>
     );
 }

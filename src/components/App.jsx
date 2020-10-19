@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root';
-import React, { useState } from 'react';
+import React from 'react';
 import './app.scss';
 
 // Components
@@ -11,15 +11,11 @@ import Form from './form/Form';
 // We use PureComponent instead of Component because it handles the shouldComponentUpdate method for us.
 // If we want to define our own shouldComponentUpdate logic we have to use Component instead of PureComponent.
 function App() {
-    const [search, setSearch] = useState('love');
-
     return (
         <>
-            <Header
-                setSearchString={(newString) => setSearch(newString)}
-            />
+            <Header/>
             <Intro/>
-            <List searchString={search}/>
+            <List/>
             <footer>
                 <Form/>
             </footer>
