@@ -2,13 +2,19 @@ import React, { useState, useEffect } from 'react';
 import './list.scss';
 
 import Site from './Site';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchSites } from '../../redux-modules/actions/siteActions';
 
 function List(props) {
+    const { searchString } = props;
     const [data, setData] = useState([]);
     const [newSites, setNewSites] = useState([]);
     const [moreAvailable, setMoreAvailable] = useState(false);
     const [rendered, setRendered] = useState(false);
     const [updated, setUpdated] = useState(false);
+    const siteList = useSelector((state) => state.sites.list);
+    const dispatch = useDispatch();
+    dispatch(searchSites(searchString, siteList.length));
 
     function getData() {
         return fetch(`https://chayns2.tobit.com/SiteSearchApi/location/search/${props.searchString}/?skip=${data.length}&take=31`)
