@@ -1,10 +1,10 @@
 import { CAN_LOAD_MORE, CLEAR_LIST, SEARCH_END, SEARCH_START, SET_SEARCH } from '../actions/siteActions';
 
 const initialState = {
-    list: [],
-    isLoading: false,
     canLoadMore: false,
     searchString: 'love',
+    ids: [],
+    entities: {},
 };
 
 const sitesReducer = (state = initialState, action) => {
@@ -13,20 +13,21 @@ const sitesReducer = (state = initialState, action) => {
             chayns.showWaitCursor();
             return {
                 ...state,
-                isLoading: true,
                 canLoadMore: false,
             };
         case SEARCH_END:
             chayns.hideWaitCursor();
-            return {
-                ...state,
-                list: state.list.concat(action.payload),
-                isLoading: false,
-            };
+            const newState = { ...state, isLoading: false };
+            action.payload.forEach((site) => {
+                newState.ids = newState.ids.concat(site.locationId);
+                newState.entities[site.locationId] = site;
+            });
+            return newState;
         case CLEAR_LIST:
             return {
                 ...state,
-                list: [],
+                ids: [],
+                entities: {},
             };
         case SET_SEARCH:
             return {

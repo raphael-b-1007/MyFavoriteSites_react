@@ -28,28 +28,12 @@ export const canLoadMore = () => ({
 
 export const searchSites = () => async (dispatch, getState) => {
     dispatch(startSearch());
-    dispatch(clearList());
-    let data = await fetch(`https://chayns2.tobit.com/SiteSearchApi/location/search/${getState().sites.searchString}/?skip=0&take=31`)
-        .then((response) => response.json()).catch(() => { });
-    if (data.length === 31) {
-        dispatch(canLoadMore());
-        data = data.slice(0, 30);
-    }
-    dispatch(endSearch(data));
-};
-
-export const fetchMoreSites = () => async (dispatch, getState) => {
-    dispatch(startSearch());
     // eslint-disable-next-line max-len
-    let data = await fetch(`https://chayns2.tobit.com/SiteSearchApi/location/search/${getState().sites.searchString}/?skip=${getState().sites.list.length}&take=31`)
+    let data = await fetch(`https://chayns2.tobit.com/SiteSearchApi/location/search/${getState().sites.searchString}/?skip=${getState().sites.ids.length}&take=31`)
         .then((response) => response.json()).catch(() => { });
     if (data.length === 31) {
         dispatch(canLoadMore());
         data = data.slice(0, 30);
     }
     dispatch(endSearch(data));
-};
-
-export const setSearchString = (searchString) => (dispatch) => {
-    dispatch(setSearch(searchString));
 };

@@ -3,12 +3,10 @@ import { Accordion, Input, TextArea, Button } from 'chayns-components/lib';
 import './form.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    setSiteComment, setSiteName,
-    setUserAddress, setUserCity,
-    setUserEMail,
-    setUserFirstName,
-    setUserLastName,
-    setUserZipCode, submitForm,
+    setAddress, setCity,
+    setEMail,
+    setFirstName, setLastName, setSite,
+    setZipCode, submitForm,
 } from '../../redux-modules/actions/formActions';
 
 function Form() {
@@ -24,8 +22,8 @@ function Form() {
 
     useEffect(() => {
         if (chayns.env.user.isAuthenticated) {
-            dispatch(setUserFirstName(chayns.env.user.firstName));
-            dispatch(setUserLastName(chayns.env.user.lastName));
+            dispatch(setFirstName(chayns.env.user.firstName));
+            dispatch(setLastName(chayns.env.user.lastName));
         }
     }, []);
 
@@ -46,7 +44,7 @@ function Form() {
                         <Input
                             placeholder="Vorname"
                             value={firstName}
-                            onChange={(value) => (dispatch(setUserFirstName(value)))}
+                            onChange={(value) => (dispatch(setFirstName(value)))}
                             className="formItem"
                             required
                             dynamic
@@ -54,7 +52,7 @@ function Form() {
                         <Input
                             placeholder="Nachname"
                             value={lastName}
-                            onChange={(value) => (dispatch(setUserLastName(value)))}
+                            onChange={(value) => (dispatch(setLastName(value)))}
                             className="formItem"
                             required
                             dynamic
@@ -62,7 +60,7 @@ function Form() {
                         <Input
                             placeholder="E-Mail"
                             value={eMail}
-                            onChange={(value) => (dispatch(setUserEMail(value)))}
+                            onChange={(value) => (dispatch(setEMail(value)))}
                             className="formItem"
                             required
                             dynamic
@@ -70,27 +68,27 @@ function Form() {
                         <Input
                             placeholder="Straße/Hausnummer"
                             value={address}
-                            onChange={(value) => (dispatch(setUserAddress(value)))}
+                            onChange={(value) => (dispatch(setAddress(value)))}
                             className="formItem"
                         />
                         <div className="twoItems">
                             <Input
                                 placeholder="PLZ"
                                 value={zipCode}
-                                onChange={(value) => (dispatch(setUserZipCode(value)))}
+                                onChange={(value) => (dispatch(setZipCode(value)))}
                                 className="smallItem formItem"
                             />
                             <Input
                                 placeholder="Ort"
                                 value={city}
-                                onChange={(value) => (dispatch(setUserCity(value)))}
+                                onChange={(value) => (dispatch(setCity(value)))}
                                 className="formItem"
                             />
                         </div>
                         <Input
                             placeholder="Deine Seite"
                             value={siteName}
-                            onChange={(value) => (dispatch(setSiteName(value)))}
+                            onChange={(value) => (dispatch(setSite(value)))}
                             className="formItem"
                             required
                             dynamic
@@ -98,7 +96,7 @@ function Form() {
                         <TextArea
                             placeholder="Anmerkungen"
                             value={comment}
-                            onChange={(value) => (dispatch(setSiteComment(value)))}
+                            onChange={(value) => (dispatch(setSite(value)))}
                             className="formItem"
                         />
                         <div className="centered formItem">

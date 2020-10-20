@@ -52,38 +52,6 @@ export const submit = () => ({
     type: SUBMIT_FORM,
 });
 
-export const setUserFirstName = (firstName) => (dispatch) => {
-    dispatch(setFirstName(firstName));
-};
-
-export const setUserLastName = (lastName) => (dispatch) => {
-    dispatch(setLastName(lastName));
-};
-
-export const setUserEMail = (eMail) => (dispatch) => {
-    dispatch(setEMail(eMail));
-};
-
-export const setUserAddress = (address) => (dispatch) => {
-    dispatch(setAddress(address));
-};
-
-export const setUserZipCode = (zipCode) => (dispatch) => {
-    dispatch(setZipCode(zipCode));
-};
-
-export const setUserCity = (city) => (dispatch) => {
-    dispatch(setCity(city));
-};
-
-export const setSiteName = (siteName) => (dispatch) => {
-    dispatch(setSite(siteName));
-};
-
-export const setSiteComment = (comment) => (dispatch) => {
-    dispatch(setComment(comment));
-};
-
 export const submitForm = () => (dispatch, getState) => {
     const message = `Eine Seite wurde vorgeschlagen: ${getState().form.siteName} \n
         Von: ${getState().form.firstName} ${getState().form.lastName} \n
