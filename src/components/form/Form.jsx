@@ -1,48 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Accordion, Input, TextArea, Button } from 'chayns-components/lib';
 import './form.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    setSiteComment, setSiteName,
+    setUserAddress, setUserCity,
+    setUserEMail,
+    setUserFirstName,
+    setUserLastName,
+    setUserZipCode, submitForm,
+} from '../../redux-modules/actions/formActions';
 
 function Form() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [eMail, setEMail] = useState('');
-    const [address, setAddress] = useState('');
-    const [areaCode, setAreaCode] = useState('');
-    const [city, setCity] = useState('');
-    const [siteName, setSiteName] = useState('');
-    const [comment, setComment] = useState('');
+    const dispatch = useDispatch();
+    const firstName = useSelector((state) => state.form.firstName);
+    const lastName = useSelector((state) => state.form.lastName);
+    const eMail = useSelector((state) => state.form.eMail);
+    const address = useSelector((state) => state.form.address);
+    const zipCode = useSelector((state) => state.form.zipCode);
+    const city = useSelector((state) => state.form.city);
+    const siteName = useSelector((state) => state.form.siteName);
+    const comment = useSelector((state) => state.form.comment);
 
     useEffect(() => {
         if (chayns.env.user.isAuthenticated) {
-            setFirstName(chayns.env.user.firstName);
-            setLastName(chayns.env.user.lastName);
+            dispatch(setUserFirstName(chayns.env.user.firstName));
+            dispatch(setUserLastName(chayns.env.user.lastName));
         }
     }, []);
 
-    function sendForm() {
-        const message = `Eine Seite wurde vorgeschlagen: ${siteName} \n
-        Von: ${firstName} ${lastName} \n
-        E-Mail: ${eMail} \n
-        Adresse: ${address} ${areaCode} ${city} \n
-        Anmerkung: ${comment}`;
-        chayns.intercom.sendMessageToPage({
-            text: message,
-        }).then((data) => {
-            if (data.status === 200) chayns.dialog.alert('', `Vielen Dank, ${chayns.env.user.firstName}`);
-        });
-        setEMail('');
-        setAddress('');
-        setAreaCode('');
-        setCity('');
-        setSiteName('');
-        setComment('');
-    }
-
     function submit() {
         if (chayns.env.user.isAuthenticated) {
-            sendForm();
+            dispatch(submitForm());
         } else {
-            chayns.addAccessTokenChangeListener(sendForm);
+            chayns.addAccessTokenChangeListener(() => (dispatch(submitForm())));
             chayns.login();
         }
     }
@@ -55,7 +46,7 @@ function Form() {
                         <Input
                             placeholder="Vorname"
                             value={firstName}
-                            onChange={setFirstName}
+                            onChange={(value) => (dispatch(setUserFirstName(value)))}
                             className="formItem"
                             required
                             dynamic
@@ -63,7 +54,7 @@ function Form() {
                         <Input
                             placeholder="Nachname"
                             value={lastName}
-                            onChange={setLastName}
+                            onChange={(value) => (dispatch(setUserLastName(value)))}
                             className="formItem"
                             required
                             dynamic
@@ -71,7 +62,7 @@ function Form() {
                         <Input
                             placeholder="E-Mail"
                             value={eMail}
-                            onChange={setEMail}
+                            onChange={(value) => (dispatch(setUserEMail(value)))}
                             className="formItem"
                             required
                             dynamic
@@ -79,27 +70,27 @@ function Form() {
                         <Input
                             placeholder="Straße/Hausnummer"
                             value={address}
-                            onChange={setAddress}
+                            onChange={(value) => (dispatch(setUserAddress(value)))}
                             className="formItem"
                         />
                         <div className="twoItems">
                             <Input
                                 placeholder="PLZ"
-                                value={areaCode}
-                                onChange={setAreaCode}
+                                value={zipCode}
+                                onChange={(value) => (dispatch(setUserZipCode(value)))}
                                 className="smallItem formItem"
                             />
                             <Input
                                 placeholder="Ort"
                                 value={city}
-                                onChange={setCity}
+                                onChange={(value) => (dispatch(setUserCity(value)))}
                                 className="formItem"
                             />
                         </div>
                         <Input
                             placeholder="Deine Seite"
                             value={siteName}
-                            onChange={setSiteName}
+                            onChange={(value) => (dispatch(setSiteName(value)))}
                             className="formItem"
                             required
                             dynamic
@@ -107,7 +98,7 @@ function Form() {
                         <TextArea
                             placeholder="Anmerkungen"
                             value={comment}
-                            onChange={setComment}
+                            onChange={(value) => (dispatch(setSiteComment(value)))}
                             className="formItem"
                         />
                         <div className="centered formItem">
